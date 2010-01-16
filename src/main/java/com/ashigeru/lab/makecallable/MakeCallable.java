@@ -74,7 +74,7 @@ public @interface MakeCallable {
      * </p>
      * <ul>
      * <li> must be declared as {@code public}, {@code protected}, or default package access </li>
-     * <li> only can throw exceptions either subtype of {@link Exception} or {@link Error} </li>
+     * <li> only can throw exceptions either subtype of {@link Exception} or {@link Error} except type variables </li>
      * </ul>
      */
     String name() default "default";
