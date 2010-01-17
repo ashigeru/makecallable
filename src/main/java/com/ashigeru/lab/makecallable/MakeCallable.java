@@ -23,6 +23,13 @@ import java.lang.annotation.Target;
 
 /**
  * Provides {@link java.util.concurrent.Callable} interfaces for the annotated methods.
+ * <p>
+ * Each annotated method:
+ * </p>
+ * <ul>
+ * <li> must be declared as {@code public}, {@code protected}, or default package access </li>
+ * <li> only can throw exceptions either subtype of {@link Exception} or {@link Error} except type variables </li>
+ * </ul>
  * <pre>
  * // the original source
  * package com.example;
@@ -64,20 +71,13 @@ import java.lang.annotation.Target;
 public @interface MakeCallable {
 
     /**
-     * The simple name of the generated callable class for the method.
+     * The simple name pattern of the generated callable class for the method.
      * <p>
-     * Each generated callable class must have the unique simple name.
-     * If not specified, the generator will use the name of the annotated.
+     * This pattern must be the same manner with {@link java.text.MessageFormat#format(String, Object...)},
+     * and <code>"{0}"</code> in the pattern will be replaced with the simple name of the original method.
      * </p>
-     * <p>
-     * Each annotated method:
-     * </p>
-     * <ul>
-     * <li> must be declared as {@code public}, {@code protected}, or default package access </li>
-     * <li> only can throw exceptions either subtype of {@link Exception} or {@link Error} except type variables </li>
-     * </ul>
      */
-    String name() default "default";
+    String name() default "{0}";
 
     /**
      * Accessibility of the generated method.
